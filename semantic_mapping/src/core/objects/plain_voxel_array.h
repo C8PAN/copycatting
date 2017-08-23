@@ -25,8 +25,41 @@ public:
   struct IndexCache {};
 
 private:
-  
+  utils:MemoryBlock<IndexData> *index_data_;
+  MemoryDeviceType memory_type_; 
 
+public:
+  PlainVoxelArray(MemoryDeviceType memory_type) {
+    this->memory_type_ = memory_type;
+    if(memory_type==MEMORY_DEVICE_GPU) 
+      index_data_ = new utils::MemoryBlock<IndexData>(1, true, true);
+    else 
+      index_data_ = new utils::MemoryBlock<IndexData>(1, true, false);
+    index_data_->GetData(MEMORY_DEVICE_CPU)[0] = IndeData();
+    index_data_->UpdateDeviceFromHost();
+  }
+
+  ~PlainVoxelArray() { delete index_data_; }
+
+  int GetNumAllocatedVoxelBlocks() { return 1; }
+  
+  int GetVoxelBlockSize() {
+    return index_data_->GetData(MEMORY_DEVICE_CPU)->size.x*
+           index_data_->GetData(MEMORY_DEVICE_CPU)->size.y*
+           index_data_->GetData(MEMORY_DEVICE_CPU)->size.z;
+  }
+
+  const Vector3i GetVolumeSize() {
+    return index_data_->GetData(memory_type_)->size;
+  }
+
+  const IndexData* GetIndexData() {
+    return index_data_->GetData(memory_type_);
+  }
+
+  // supress the default copy constructor and assignment operator
+  PlainVoxelArray(const PlainVoxelArray&);
+  PlainVoxelArray& operator=(const PlainVoxelArray&); 
 };
 
 }
