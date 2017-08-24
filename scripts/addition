@@ -1,0 +1,4 @@
+cd ~/.vim/bundle
+git clone --recursive https://github.com/Valloric/YouCompleteMe.git
+cd YouCompleteMe
+./install.py --clang-completer
