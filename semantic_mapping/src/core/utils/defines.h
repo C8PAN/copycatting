@@ -116,6 +116,14 @@ struct Voxel_f {
 
 typedef Voxel_s Voxel;
 
+#ifndef TRACKER_ITERATION_TYPE
+#define TRACKER_ITERATION_TYPE
+typedef enum {
+  TRACKER_ITERATION_ROTATION = 1, TRACKER_ITERATION_TRANSLATION = 2,
+  TRACKER_ITERATION_BOTH = 3, TRACKER_ITERATION_NONE = 4
+} TrackerIterationType;
+#endif
+
                  
                                                                             
 #endif

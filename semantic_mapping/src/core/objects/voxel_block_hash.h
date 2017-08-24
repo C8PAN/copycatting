@@ -22,7 +22,7 @@ public:
 private:
   int last_free_excess_list_id_;
   utils::MemoryBlock<HashEntry> *hash_entries_;
-  utils::MemoryBlock<int> *excess_allocation_list_;
+  utils::MemoryBlock<int> *excess_allocation_list_;                                 
   MemoryDeviceType memory_type_;
 
 public:

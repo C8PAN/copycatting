@@ -1,0 +1,132 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Allocate	src/utils/memory_block.h	/^  void Allocate(size_t data_size, bool allocate_cpu, bool allocate_gpu) {$/;"	f	class:utils::MemoryBlock
+CORE_DEFINES_H	src/core/utils/defines.h	2;"	d
+CPU_TO_CPU	src/utils/memory_block.h	/^  enum MemoryCopyDirection { CPU_TO_CPU, CPU_TO_GPU, GPU_TO_GPU, GPU_TO_CPU};$/;"	e	enum:utils::MemoryBlock::MemoryCopyDirection
+CPU_TO_GPU	src/utils/memory_block.h	/^  enum MemoryCopyDirection { CPU_TO_CPU, CPU_TO_GPU, GPU_TO_GPU, GPU_TO_CPU};$/;"	e	enum:utils::MemoryBlock::MemoryCopyDirection
+CUDA_WRAPPER_H	src/utils/cuda_wrapper.h	2;"	d
+Clear	src/utils/memory_block.h	/^  void Clear(unsigned char dafault_value=0) {$/;"	f	class:utils::MemoryBlock
+CudaSafeCall	src/utils/cuda_wrapper.h	11;"	d
+Free	src/utils/memory_block.h	/^  void Free() {$/;"	f	class:utils::MemoryBlock
+GPU_TO_CPU	src/utils/memory_block.h	/^  enum MemoryCopyDirection { CPU_TO_CPU, CPU_TO_GPU, GPU_TO_GPU, GPU_TO_CPU};$/;"	e	enum:utils::MemoryBlock::MemoryCopyDirection
+GPU_TO_GPU	src/utils/memory_block.h	/^  enum MemoryCopyDirection { CPU_TO_CPU, CPU_TO_GPU, GPU_TO_GPU, GPU_TO_CPU};$/;"	e	enum:utils::MemoryBlock::MemoryCopyDirection
+GetAllocatedVoxelBlocksNum	src/core/objects/plain_voxel_array.h	/^  int GetAllocatedVoxelBlocksNum() { return 1; }$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+GetAllocatedVoxelBlocksNum	src/core/objects/voxel_block_hash.h	/^  int GetAllocatedVoxelBlocksNum() { return SDF_LOCAL_BLOCK_NUM; }$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetData	src/utils/memory_block.h	/^  inline T* GetData(MemoryDeviceType memory_type) {$/;"	f	class:utils::MemoryBlock
+GetEntries	src/core/objects/voxel_block_hash.h	/^  HashEntry* GetEntries() {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetEntries	src/core/objects/voxel_block_hash.h	/^  const HashEntry* GetEntries() const { $/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetExcessAllocationList	src/core/objects/voxel_block_hash.h	/^  const int* GetExcessAllocationList() const {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetExcessAllocationList	src/core/objects/voxel_block_hash.h	/^  int* GetExcessAllocationList() {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetIndexData	src/core/objects/plain_voxel_array.h	/^  const IndexData* GetIndexData() {$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+GetIndexData	src/core/objects/voxel_block_hash.h	/^  IndexData* GetIndexData() {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetIndexData	src/core/objects/voxel_block_hash.h	/^  const IndexData* GetIndexData() const {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetLastFreeExcessListId	src/core/objects/voxel_block_hash.h	/^  int GetLastFreeExcessListId() { return last_free_excess_list_id_; } $/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+GetVolumeSize	src/core/objects/plain_voxel_array.h	/^  const Vector3i GetVolumeSize() {$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+GetVoxelBlockSize	src/core/objects/plain_voxel_array.h	/^  int GetVoxelBlockSize() {$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+GetVoxelBlockSize	src/core/objects/voxel_block_hash.h	/^  int GetVoxelBlockSize() { return SDF_BLOCK_SIZE3; }$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+HashEntry	src/core/utils/defines.h	/^struct HashEntry {$/;"	s
+HashSwapState	src/core/utils/defines.h	/^struct HashSwapState {$/;"	s
+IndexCache	src/core/objects/plain_voxel_array.h	/^  struct IndexCache {};$/;"	s	class:semantic_mapping::objects::PlainVoxelArray
+IndexCache	src/core/objects/voxel_block_hash.h	/^    _CPU_AND_GPU_CODE_ IndexCache() : block_pose(0x7fffffff), block_ptr(-1) {}$/;"	f	struct:semantic_mapping::objects::VoxelBlockHash::IndexCache
+IndexCache	src/core/objects/voxel_block_hash.h	/^  struct IndexCache {$/;"	s	class:semantic_mapping::objects::VoxelBlockHash
+IndexData	src/core/objects/plain_voxel_array.h	/^  typedef VoxelArrayInfo IndexData;$/;"	t	class:semantic_mapping::objects::PlainVoxelArray
+IndexData	src/core/objects/voxel_block_hash.h	/^  typedef HashEntry IndexData;$/;"	t	class:semantic_mapping::objects::VoxelBlockHash
+MEMORY_BLOCK_H	src/utils/memory_block.h	2;"	d
+MEMORY_DEVICE_CPU	src/utils/memory_block.h	/^enum MemoryDeviceType { MEMORY_DEVICE_CPU, MEMORY_DEVICE_GPU };$/;"	e	enum:MemoryDeviceType
+MEMORY_DEVICE_GPU	src/utils/memory_block.h	/^enum MemoryDeviceType { MEMORY_DEVICE_CPU, MEMORY_DEVICE_GPU };$/;"	e	enum:MemoryDeviceType
+MEMORY_DEVICE_TYPE	src/utils/memory_block.h	8;"	d
+MemoryBlock	src/utils/memory_block.h	/^  MemoryBlock(size_t data_size, MemoryDeviceType memory_type) {$/;"	f	class:utils::MemoryBlock
+MemoryBlock	src/utils/memory_block.h	/^  MemoryBlock(size_t data_size, bool allocate_cpu, bool allocate_gpu) {$/;"	f	class:utils::MemoryBlock
+MemoryBlock	src/utils/memory_block.h	/^class MemoryBlock {$/;"	c	namespace:utils
+MemoryCopyDirection	src/utils/memory_block.h	/^  enum MemoryCopyDirection { CPU_TO_CPU, CPU_TO_GPU, GPU_TO_GPU, GPU_TO_CPU};$/;"	g	class:utils::MemoryBlock
+MemoryDeviceType	src/utils/memory_block.h	/^enum MemoryDeviceType { MEMORY_DEVICE_CPU, MEMORY_DEVICE_GPU };$/;"	g
+PLAIN_VOXEL_ARRAY_H	src/core/objects/plain_voxel_array.h	2;"	d
+PlainVoxelArray	src/core/objects/plain_voxel_array.h	/^  PlainVoxelArray(MemoryDeviceType memory_type) {$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+PlainVoxelArray	src/core/objects/plain_voxel_array.h	/^class PlainVoxelArray {$/;"	c	namespace:semantic_mapping::objects
+SDFFloatToValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFFloatToValue(float x) { return x; }$/;"	f	struct:VoxelRGB_f
+SDFFloatToValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFFloatToValue(float x) { return x; }$/;"	f	struct:Voxel_f
+SDFFloatToValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static short SDFFloatToValue() { return (short)((x)*32767.0f); }$/;"	f	struct:Voxel_s
+SDFFloatToValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static short SDFFloatToValue(float x) { return (short)((x)*32767.0f);}$/;"	f	struct:VoxelRGB_s
+SDFInitialValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFInitialValue() { return 1.0f; }$/;"	f	struct:VoxelRGB_f
+SDFInitialValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFInitialValue() { return 1.0f; }$/;"	f	struct:Voxel_f
+SDFInitialValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static short SDFInitialValue() { return 32767; }$/;"	f	struct:VoxelRGB_s
+SDFInitialValue	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static short SDFInitialValue() { return 32767; }$/;"	f	struct:Voxel_s
+SDFValueToFloat	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFValueToFloat() { return (float)(x)\/32767.0f; }$/;"	f	struct:Voxel_s
+SDFValueToFloat	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFValueToFloat(float x) { return (float)(x)\/32767.0f; }$/;"	f	struct:VoxelRGB_s
+SDFValueToFloat	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFValueToFloat(float x) { return x; }$/;"	f	struct:VoxelRGB_f
+SDFValueToFloat	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ static float SDFValueToFloat(float x) { return x; }$/;"	f	struct:Voxel_f
+SDF_BLOCK_SIZE	src/core/utils/defines.h	10;"	d
+SDF_BLOCK_SIZE3	src/core/utils/defines.h	11;"	d
+SDF_BUCKET_NUM	src/core/utils/defines.h	17;"	d
+SDF_EXCESS_LIST_SIZE	src/core/utils/defines.h	19;"	d
+SDF_GLOBAL_BLOCK_NUM	src/core/utils/defines.h	14;"	d
+SDF_HASH_MASK	src/core/utils/defines.h	18;"	d
+SDF_LOCAL_BLOCK_NUM	src/core/utils/defines.h	12;"	d
+SDF_TRANSFER_BLOCK_NUM	src/core/utils/defines.h	15;"	d
+SetFrom	src/utils/memory_block.h	/^  void SetFrom(const MemoryBlock<t> *source, $/;"	f	class:utils::MemoryBlock
+SetLastFreeExcessListId	src/core/objects/voxel_block_hash.h	/^  void SetLastFreeExcessListId(int last_free_excess_list_id) {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+UpdateDeviceFromHost	src/utils/memory_block.h	/^  void UpdateDeviceFromHost() const {$/;"	f	class:utils::MemoryBlock
+UpdateHostFromDevice	src/utils/memory_block.h	/^  void UpdateHostFromDevice() const {$/;"	f	class:utils::MemoryBlock
+VOXEL_BLOCK_HASH_H	src/core/objects/voxel_block_hash.h	2;"	d
+Voxel	src/core/utils/defines.h	/^typedef Voxel_s Voxel;$/;"	t
+VoxelArrayInfo	src/core/objects/plain_voxel_array.h	/^    VoxelArrayInfo(void) {$/;"	f	struct:semantic_mapping::objects::PlainVoxelArray::VoxelArrayInfo
+VoxelArrayInfo	src/core/objects/plain_voxel_array.h	/^  struct VoxelArrayInfo {$/;"	s	class:semantic_mapping::objects::PlainVoxelArray
+VoxelBlockHash	src/core/objects/voxel_block_hash.h	/^  VoxelBlockHash(MemoryDeviceType memory_type) {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
+VoxelBlockHash	src/core/objects/voxel_block_hash.h	/^class VoxelBlockHash {$/;"	c	namespace:semantic_mapping::objects
+VoxelRGB_f	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ VoxelRGB_f() {$/;"	f	struct:VoxelRGB_f
+VoxelRGB_f	src/core/utils/defines.h	/^struct VoxelRGB_f {$/;"	s
+VoxelRGB_s	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ VoxelRGB_s() {$/;"	f	struct:VoxelRGB_s
+VoxelRGB_s	src/core/utils/defines.h	/^struct VoxelRGB_s {$/;"	s
+Voxel_f	src/core/utils/defines.h	/^struct Voxel_f {$/;"	s
+Voxel_s	src/core/utils/defines.h	/^  _CPU_AND_GPU_CODE_ Voxel_s() {$/;"	f	struct:Voxel_s
+Voxel_s	src/core/utils/defines.h	/^struct Voxel_s {$/;"	s
+__cudaSafeCall	src/utils/cuda_wrapper.h	/^inline void __cudaSafeCall(cudaError error, const char *file, const int line) {$/;"	f	namespace:utils
+block_pose	src/core/objects/voxel_block_hash.h	/^    Vector3i block_pose;$/;"	m	struct:semantic_mapping::objects::VoxelBlockHash::IndexCache
+block_ptr	src/core/objects/voxel_block_hash.h	/^    int block_ptr;$/;"	m	struct:semantic_mapping::objects::VoxelBlockHash::IndexCache
+color_	src/core/utils/defines.h	/^  Vector3u color_;$/;"	m	struct:VoxelRGB_f
+color_	src/core/utils/defines.h	/^  Vector3u color_;$/;"	m	struct:VoxelRGB_s
+data_cpu_	src/utils/memory_block.h	/^  T* data_cpu_;$/;"	m	class:utils::MemoryBlock
+data_gpu_	src/utils/memory_block.h	/^  T* data_gpu_;  $/;"	m	class:utils::MemoryBlock
+data_size_	src/utils/memory_block.h	/^  size_t data_size_;$/;"	m	class:utils::MemoryBlock
+excess_allocation_list_	src/core/objects/voxel_block_hash.h	/^  utils::MemoryBlock<int> *excess_allocation_list_;$/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+has_color_information_	src/core/utils/defines.h	/^  static const bool has_color_information_ = false;$/;"	m	struct:Voxel_f
+has_color_information_	src/core/utils/defines.h	/^  static const bool has_color_information_ = false;$/;"	m	struct:Voxel_s
+has_color_information_	src/core/utils/defines.h	/^  static const bool has_color_information_ = true;$/;"	m	struct:VoxelRGB_f
+has_color_information_	src/core/utils/defines.h	/^  static const bool has_color_information_ = true;$/;"	m	struct:VoxelRGB_s
+hash_entries_	src/core/objects/voxel_block_hash.h	/^  utils::MemoryBlock<HashEntry> *hash_entries_;$/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+index_data_	src/core/objects/plain_voxel_array.h	/^  utils:MemoryBlock<IndexData> *index_data_;$/;"	m	class:semantic_mapping::objects::PlainVoxelArray
+is_allocated_cpu_	src/utils/memory_block.h	/^  bool is_allocated_cpu_, is_allocated_gpu_;$/;"	m	class:utils::MemoryBlock
+is_allocated_gpu_	src/utils/memory_block.h	/^  bool is_allocated_cpu_, is_allocated_gpu_;$/;"	m	class:utils::MemoryBlock
+last_free_excess_list_id_	src/core/objects/voxel_block_hash.h	/^  int last_free_excess_list_id_;$/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+memory_type_	src/core/objects/plain_voxel_array.h	/^  MemoryDeviceType memory_type_; $/;"	m	class:semantic_mapping::objects::PlainVoxelArray
+memory_type_	src/core/objects/voxel_block_hash.h	/^  MemoryDeviceType memory_type_;$/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+objects	src/core/objects/plain_voxel_array.h	/^namespace objects {$/;"	n	namespace:semantic_mapping
+objects	src/core/objects/voxel_block_hash.h	/^namespace objects {$/;"	n	namespace:semantic_mapping
+offset	src/core/objects/plain_voxel_array.h	/^    Vector3i offset;$/;"	m	struct:semantic_mapping::objects::PlainVoxelArray::VoxelArrayInfo
+offset	src/core/utils/defines.h	/^  int offset;$/;"	m	struct:HashEntry
+pos	src/core/utils/defines.h	/^  Vector3s pos;$/;"	m	struct:HashEntry
+ptr	src/core/utils/defines.h	/^  int ptr;$/;"	m	struct:HashEntry
+sdf_	src/core/utils/defines.h	/^  float sdf_;$/;"	m	struct:VoxelRGB_f
+sdf_	src/core/utils/defines.h	/^  float sdf_;$/;"	m	struct:Voxel_f
+sdf_	src/core/utils/defines.h	/^  short sdf_;$/;"	m	struct:VoxelRGB_s
+sdf_	src/core/utils/defines.h	/^  short sdf_;$/;"	m	struct:Voxel_s
+semantic_mapping	src/core/objects/plain_voxel_array.h	/^namespace semantic_mapping {$/;"	n
+semantic_mapping	src/core/objects/voxel_block_hash.h	/^namespace semantic_mapping {$/;"	n
+size	src/core/objects/plain_voxel_array.h	/^    Vector3i size;$/;"	m	struct:semantic_mapping::objects::PlainVoxelArray::VoxelArrayInfo
+state	src/core/utils/defines.h	/^  uchar state;$/;"	m	struct:HashSwapState
+total_entries_num	src/core/objects/voxel_block_hash.h	/^  static const int total_entries_num = SDF_BUCKET_NUM + SDF_EXCESS_LIST_SIZE;$/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+utils	src/utils/cuda_wrapper.h	/^namespace utils {$/;"	n
+utils	src/utils/memory_block.h	/^namespace utils {$/;"	n
+voxel_blick_size	src/core/objects/voxel_block_hash.h	/^  static const int voxel_blick_size $/;"	m	class:semantic_mapping::objects::VoxelBlockHash
+w_color_	src/core/utils/defines.h	/^  uchar w_color_;$/;"	m	struct:VoxelRGB_f
+w_color_	src/core/utils/defines.h	/^  uchar w_color_;$/;"	m	struct:VoxelRGB_s
+w_depth_	src/core/utils/defines.h	/^  uchar w_depth_;$/;"	m	struct:VoxelRGB_s
+w_depth_	src/core/utils/defines.h	/^  uchar w_depth_;$/;"	m	struct:Voxel_f
+w_depth_	src/core/utils/defines.h	/^  uchar w_depth_;$/;"	m	struct:Voxel_s
+~MemoryBlock	src/utils/memory_block.h	/^  virtual ~MemoryBlock() { this->Free(); }$/;"	f	class:utils::MemoryBlock
+~PlainVoxelArray	src/core/objects/plain_voxel_array.h	/^  ~PlainVoxelArray() { delete index_data_; }$/;"	f	class:semantic_mapping::objects::PlainVoxelArray
+~VoxelBlockHash	src/core/objects/voxel_block_hash.h	/^  ~VoxelBlockHash() {$/;"	f	class:semantic_mapping::objects::VoxelBlockHash
