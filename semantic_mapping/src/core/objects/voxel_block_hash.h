@@ -26,7 +26,54 @@ private:
   MemoryDeviceType memory_type_;
 
 public:
-    
+  VoxelBlockHash(MemoryDeviceType memory_type) {
+    this->memory_type_ = memory_type;
+    hash_entries_ = new utils::MemeoryBlock<HashEntry>(total_entries_num, 
+                                                       memory_type);
+    excess_allocation_list_ = new utils::MemoryBlock<int>(SDF_EXCESS_LIST_SIZE,
+                                                          memory_type);
+  }   
+
+  ~VoxelBlockHash() {
+    delete hash_entries_;
+    delete excess_allocation_list_;
+  }  
+
+  const HashEntry* GetEntries() const { 
+    return hash_entries_->GetData(memory_type_);
+  }
+
+  HashEntry* GetEntries() {
+    return hash_entries_->GetData(memory_type_);
+  }
+
+  const IndexData* GetIndexData() const {
+    return hash_entries_->GetData(memory_type_);
+  }
+
+  IndexData* GetIndexData() {
+    return hash_entries_->GetData(memory_type_);
+  }
+
+  const int* GetExcessAllocationList() const {
+    return excess_allocation_list_->GetData(memory_type_);
+  }
+
+  int* GetExcessAllocationList() {
+    return excess_allocation_list_->GetData(memory_type_);
+  }
+
+  int GetLastFreeExcessListId() { return last_free_excess_list_id_; } 
+
+  void SetLastFreeExcessListId(int last_free_excess_list_id) {
+    this->last_free_excess_list_id_ = last_free_excess_list_id;
+  }
+
+  int GetAllocatedVoxelBlocksNum() { return SDF_LOCAL_BLOCK_NUM; }
+  int GetVoxelBlockSize() { return SDF_BLOCK_SIZE3; }
+
+  VoxelBlockHash(const VoxelBlockHash&);
+  VoxelBlockHash& operator=(const VoxelBlockHash&);
 };
 
 }

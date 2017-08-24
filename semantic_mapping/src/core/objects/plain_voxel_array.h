@@ -41,7 +41,7 @@ public:
 
   ~PlainVoxelArray() { delete index_data_; }
 
-  int GetNumAllocatedVoxelBlocks() { return 1; }
+  int GetAllocatedVoxelBlocksNum() { return 1; }
   
   int GetVoxelBlockSize() {
     return index_data_->GetData(MEMORY_DEVICE_CPU)->size.x*
