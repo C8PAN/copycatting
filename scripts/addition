@@ -1,4 +1,7 @@
 cd ~/.vim/bundle
 git clone --recursive https://github.com/Valloric/YouCompleteMe.git
 cd YouCompleteMe
-./install.py --clang-completer
+sudo apt-get install python3-dev
+python3 ./install.py --clang-completer
+cp ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py ~/
+
