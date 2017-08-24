@@ -73,7 +73,7 @@ set ruler
 set showcmd
 set cursorline
 
-" let g:UltiSnipsUsePythonVersion = 3 
+let g:UltiSnipsUsePythonVersion = 3 
 let g:UltiSnipsExpandTrigger='<c-k>'
 let g:UltiSnipsListSnippets='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-f>'
