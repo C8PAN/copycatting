@@ -24,7 +24,7 @@ Plugin 'scrooloose/nerdtree'
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
@@ -33,10 +33,6 @@ Plugin 'honza/vim-snippets'
 " let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<c-b>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 call vundle#end()
 "filetype plugin indent on    " required
@@ -77,13 +73,19 @@ set ruler
 set showcmd
 set cursorline
 
-let g:UltiSnipsUsePythonVersion = 3 
+" let g:UltiSnipsUsePythonVersion = 3 
 let g:UltiSnipsExpandTrigger='<c-k>'
 let g:UltiSnipsListSnippets='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-f>'
 let g:UltiSnipsJumpBackwardTrigger='<c-b>'
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
+" C/C++关键字自动补全
+let g:ycm_seed_identifiers_with_syntax = 1 
+
 
 colo desert
 set colorcolumn=80
