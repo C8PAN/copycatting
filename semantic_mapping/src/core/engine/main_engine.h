@@ -10,7 +10,9 @@ public:
 private:
   const Settings* settings_;
   bool fusion_active_, main_processing_active_;
-  
+  LowLevelEngine* low_level_engine_; 
+  VisualisationEngine* visualisation_engine_;
+
 };
 		
 } /* main_engine */ 		

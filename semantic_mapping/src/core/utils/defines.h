@@ -116,6 +116,56 @@ struct Voxel_f {
 
 typedef Voxel_s Voxel;
 
+#ifndef FloatImage
+#define FloatImage utils::Image<float> 
+#endif /* ifndef FloatImage utils::Image<float> */
+
+#ifndef Float2Image
+#define Float2Image utils::Image<Vector2f>
+#endif /* ifndef Float2Image */
+
+#ifndef Float4Image
+#define Float4Image utils::Image<Vector4f>
+#endif /* ifndef Float4Image */
+
+#ifndef ShortImage
+#define ShortImage utils::Image<short>
+#endif /* ifndef ShortImage */
+
+#ifndef Short3Image
+#define Short3Image utils::Image<Vector3s>
+#endif /* ifndef Short3Image */
+
+#ifndef Short4Image
+#define Short4Image utils::Image<Vector4s>
+#endif /* ifndef Short4Image */
+
+#ifndef UshortImage
+#define UshortImage utils::Image<ushort>
+#endif /* ifndef UShortImage */
+
+#ifndef UintImage
+#define UintImage utils::Image<uint>
+#endif /* ifndef UIntImage */
+
+#ifndef IntImage
+#define IntImage utils::Image<int>
+#endif /* ifndef IntImage */
+
+#ifndef UcharImage
+#define UcharImage utils::Image<uchar>
+#endif /* ifndef UCharImage */
+
+#ifndef Uchar4Image
+#define Uchar4Image utils::Image<Vector4u>
+#endif /* ifndef UChar4Image */
+
+#ifndef BoolImage
+#define BoolImage utils::Image<bool>
+#endif /* ifndef BoolImage */
+
+
+
 #ifndef TRACKER_ITERATION_TYPE
 #define TRACKER_ITERATION_TYPE
 typedef enum {
