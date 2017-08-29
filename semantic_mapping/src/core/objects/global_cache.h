@@ -57,6 +57,22 @@ public:
              SDF_TRANSFER_BLOCK_NUM*sizeof(TVoxel)*SDF_BLOCK_SIZE3)); 
     SafeCall(cudaMallocHost((void**)&has_synced_data_host_,
              SDF_TRANSFER_BLOCK_NUM*sizeof(bool)));
+    SafeCall(cudaMallocHost((void**)&needed_entry_ids_host_, 
+             SDF_TRANSFER_BLOCK_NUM*sizeof(int)));
+    SafeCall(cudaMalloc((void**)&swap_state_device_, 
+             num_total_entries_*sizeof(HashSwapState)));    
+    SafeCall(cudaMemset(swap_state_device_, 0, 
+             num_total_entries_*sizeof(HashSwapState)));
+    SafeCall(cudaMalloc((void**)&synced_voxel_blocks_device_, 
+             SDF_TRANSFER_BLOCK_NUM*sizeof(TVoxel)*SDF_BLOCK_SIZE3));
+    SafeCall(cudaMalloc((void**)&has_synced_data_device_,
+             SDF_TRANSFER_BLOCK_NUM*sizeof(bool)));
+    SafeCall(cudaMalloc((void**)&needed_entry_ids_device_, 
+             SDF_TRANSFER_BLOCK_NUM*sizeof(int)));
+  }
+
+  void SaveToFile(char* file_name) const {
+    TVoxel* stored_data = stored_voxel_blocks_;
     
   }
 
