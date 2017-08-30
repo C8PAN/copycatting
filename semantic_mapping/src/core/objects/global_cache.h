@@ -73,7 +73,40 @@ public:
 
   void SaveToFile(char* file_name) const {
     TVoxel* stored_data = stored_voxel_blocks_;
+    FILE* f = fopen(file_name, "wb");
+    fwrite(has_stored_data_, sizeof(bool), num_total_entries_, f);
+    for(int i=0; i<num_total_entries_; i++) {
+      fwrite(stored_data, sizeof(TVoxel)*SDF_BLOCK_SIZE3, 1, f);
+      stored_data += SDF_BLOCK_SIZE3;
+    }
+    fclose(f);
+  }
+
+  void ReadFromFile(char* file_name) {
+    TVoxel* stored_data = stored_voxel_blocks_;
+    FILE* f = fopen(file_name, "rb");
+    size_t tmp = fread(has_stored_data_, sizeof(bool), num_total_entries_, f);
+    if(tmp == (size_t)num_total_entries_) {
+      for(int i=0; i<num_total_entries_; i++) {
+        fread(stored_data, sizeof(TVoxel)*SDF_BLOCK_SIZE3, 1, f);
+        stored_data += SDF_BLOCK_SIZE3;
+      }
+    }
+    fclose(f);
+  }
+
+  ~GlobalCache() {
+    free(has_stored_data_);
+    free(stored_voxel_blocks_);
+    free(swap_state_host_);
     
+    SafeCall(cudaFreeHost(has_synced_data_host_));
+    SafeCall(cudaFree(synced_voxel_blocks_host_));
+    SafeCall(cudaFree(needed_entry_ids_host_));
+    SafeCall(cudaFree(swap_state_device_));
+    SafeCall(cudaFree(synced_voxel_blocks_device_));
+    SafeCall(cudaFree(has_synced_data_device_));
+    SafeCall(cudaFree(needed_entry_ids_device_));
   }
 
 private:

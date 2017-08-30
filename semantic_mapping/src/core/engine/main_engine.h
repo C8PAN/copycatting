@@ -12,6 +12,9 @@ private:
   bool fusion_active_, main_processing_active_;
   LowLevelEngine* low_level_engine_; 
   VisualisationEngine* visualisation_engine_;
+  MeshingEngine<Voxel, VoxelIndex>* meshing_engine_;
+  Mesh* mesh_;
+  ViewBuilder* view_builder_;
 
 };
 		
