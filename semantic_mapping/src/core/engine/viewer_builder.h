@@ -36,7 +36,7 @@ public:
                           ShortImage* depth_image, bool use_bilateral_filer,
                           ImuMeasurement* imu_measurement) = 0;
  
-  ViewerBuilder(const RGBDCalibration* calib) {
+  ViewerBuilder(const RgbdCalibration* calib) {
     this->rgbd_calibration_ = calib;
     this->short_image_ = NULL;
     this->float_image_ = NULL:
@@ -50,7 +50,7 @@ public:
   }
 
 protected:
-  const RGBDCalibration* rgbd_calibration_;
+  const RgbdCalibration* rgbd_calibration_;
   ShortImage* short_image_;
   FloatImage* float_image_;
 };	

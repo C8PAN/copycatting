@@ -22,7 +22,7 @@ public:
 
   ~ImuMeasurement() {}
 
-  ImuMeasurement(const ImuMeasurement);
+  ImuMeasurement(const ImuMeasurement&);
   ImuMeasurement& operator=(const ImuMeasurement&);
 };
 

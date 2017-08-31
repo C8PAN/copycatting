@@ -4,10 +4,10 @@
 namespace semantic_mapping {
 namespace objects {
 
-class RGBDCalibration {
+class RgbdCalibration {
 public:
   Intrinsics instrinsics_rgb_;
-  Intrinsics Intrinsics_d_;
+  Intrinsics intrinsics_depth_;
   Extrinsics transfer_rgb_to_depth_;
   DisparityCalibration disparity_calibration_;
 };

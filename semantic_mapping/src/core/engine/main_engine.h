@@ -15,6 +15,8 @@ private:
   MeshingEngine<Voxel, VoxelIndex>* meshing_engine_;
   Mesh* mesh_;
   ViewBuilder* view_builder_;
+  DenseMapper<Voxel, VoxelIndex>* dense_mapper_;
+  TrackingController* tracking_controller_;
 
 };
 		

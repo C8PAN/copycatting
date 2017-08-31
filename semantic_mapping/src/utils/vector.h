@@ -54,7 +54,7 @@ namespace utils {
 	{
 	public:
 		typedef T value_type;
-		_CPU_AND_GPU_CODE_ inline int size() const { return 2; }
+		_CPU_AND_GPU_CODE_ inline int Size() const { return 2; }
 
 		////////////////////////////////////////////////////////
 		//  Constructors
@@ -68,24 +68,24 @@ namespace utils {
 		_CPU_AND_GPU_CODE_ explicit Vector2(const Vector3_<T> &u)  { this->x = u.x; this->y = u.y; }
 		_CPU_AND_GPU_CODE_ explicit Vector2(const Vector4_<T> &u)  { this->x = u.x; this->y = u.y; }
 
-		_CPU_AND_GPU_CODE_ inline Vector2<int> toInt() const {
+		_CPU_AND_GPU_CODE_ inline Vector2<int> ToInt() const {
 			return Vector2<int>((int)ROUND(this->x), (int)ROUND(this->y));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector2<int> toIntFloor() const {
+		_CPU_AND_GPU_CODE_ inline Vector2<int> ToIntFloor() const {
 			return Vector2<int>((int)floor(this->x), (int)floor(this->y));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector2<unsigned char> toUChar() const {
-			Vector2<int> vi = toInt(); return Vector2<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255));
+		_CPU_AND_GPU_CODE_ inline Vector2<unsigned char> ToUChar() const {
+			Vector2<int> vi = ToInt(); return Vector2<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector2<float> toFloat() const {
+		_CPU_AND_GPU_CODE_ inline Vector2<float> ToFloat() const {
 			return Vector2<float>((float)this->x, (float)this->y);
 		}
 
-		_CPU_AND_GPU_CODE_ const T *getValues() const { return this->v; }
-		_CPU_AND_GPU_CODE_ Vector2<T> &setValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; return *this; }
+		_CPU_AND_GPU_CODE_ const T *GetValues() const { return this->v; }
+		_CPU_AND_GPU_CODE_ Vector2<T> &SetValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; return *this; }
 
 		// indexing operators
 		_CPU_AND_GPU_CODE_ T &operator [](int i) { return this->v[i]; }
@@ -193,7 +193,7 @@ namespace utils {
 	{
 	public:
 		typedef T value_type;
-		_CPU_AND_GPU_CODE_ inline int size() const { return 3; }
+		_CPU_AND_GPU_CODE_ inline int Size() const { return 3; }
 
 		////////////////////////////////////////////////////////
 		//  Constructors
@@ -205,53 +205,53 @@ namespace utils {
 		_CPU_AND_GPU_CODE_ explicit Vector3(const Vector4_<T> &u)	{ this->x = u.x; this->y = u.y; this->z = u.z; }
 		_CPU_AND_GPU_CODE_ explicit Vector3(const Vector2_<T> &u, T v0) { this->x = u.x; this->y = u.y; this->z = v0; }
 
-		_CPU_AND_GPU_CODE_ inline Vector3<int> toIntRound() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<int> ToIntRound() const {
 			return Vector3<int>((int)ROUND(this->x), (int)ROUND(this->y), (int)ROUND(this->z));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<int> toInt() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<int> ToInt() const {
 			return Vector3<int>((int)(this->x), (int)(this->y), (int)(this->z));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<int> toInt(Vector3<float> &residual) const {
+		_CPU_AND_GPU_CODE_ inline Vector3<int> ToInt(Vector3<float> &residual) const {
 			Vector3<int> intRound = toInt();
 			residual = Vector3<float>(this->x - intRound.x, this->y - intRound.y, this->z - intRound.z);
 			return intRound;
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<short> toShortRound() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<short> ToShortRound() const {
 			return Vector3<short>((short)ROUND(this->x), (short)ROUND(this->y), (short)ROUND(this->z));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<short> toShortFloor() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<short> ToShortFloor() const {
 			return Vector3<short>((short)floor(this->x), (short)floor(this->y), (short)floor(this->z));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<int> toIntFloor() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<int> ToIntFloor() const {
 			return Vector3<int>((int)floor(this->x), (int)floor(this->y), (int)floor(this->z));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<int> toIntFloor(Vector3<float> &residual) const {
+		_CPU_AND_GPU_CODE_ inline Vector3<int> ToIntFloor(Vector3<float> &residual) const {
 			Vector3<float> intFloor(floor(this->x), floor(this->y), floor(this->z));
 			residual = *this - intFloor;
 			return Vector3<int>((int)intFloor.x, (int)intFloor.y, (int)intFloor.z);
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<unsigned char> toUChar() const {
-			Vector3<int> vi = toIntRound(); return Vector3<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255));
+		_CPU_AND_GPU_CODE_ inline Vector3<unsigned char> ToUChar() const {
+			Vector3<int> vi = ToIntRound(); return Vector3<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<float> toFloat() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<float> ToFloat() const {
 			return Vector3<float>((float)this->x, (float)this->y, (float)this->z);
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<float> normalised() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<float> Normalised() const {
 			float norm = 1.0f / sqrt((float)(this->x * this->x + this->y * this->y + this->z * this->z));
 			return Vector3<float>((float)this->x * norm, (float)this->y * norm, (float)this->z * norm);
 		}
 
-		_CPU_AND_GPU_CODE_ const T *getValues() const	{ return this->v; }
-		_CPU_AND_GPU_CODE_ Vector3<T> &setValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; this->z = rhs[2]; return *this; }
+		_CPU_AND_GPU_CODE_ const T *GetValues() const	{ return this->v; }
+		_CPU_AND_GPU_CODE_ Vector3<T> &SetValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; this->z = rhs[2]; return *this; }
 
 		// indexing operators
 		_CPU_AND_GPU_CODE_ T &operator [](int i) { return this->v[i]; }
@@ -376,7 +376,7 @@ namespace utils {
 	{
 	public:
 		typedef T value_type;
-		_CPU_AND_GPU_CODE_ inline int size() const { return 4; }
+		_CPU_AND_GPU_CODE_ inline int Size() const { return 4; }
 
 		////////////////////////////////////////////////////////
 		//  Constructors
@@ -389,28 +389,28 @@ namespace utils {
 		_CPU_AND_GPU_CODE_ explicit Vector4(const Vector3_<T> &u, T v0) { this->x = u.x; this->y = u.y; this->z = u.z; this->w = v0; }
 		_CPU_AND_GPU_CODE_ explicit Vector4(const Vector2_<T> &u, T v0, T v1) { this->x = u.x; this->y = u.y; this->z = v0; this->w = v1; }
 
-		_CPU_AND_GPU_CODE_ inline Vector4<int> toIntRound() const {
+		_CPU_AND_GPU_CODE_ inline Vector4<int> ToIntRound() const {
 			return Vector4<int>((int)ROUND(this->x), (int)ROUND(this->y), (int)ROUND(this->z), (int)ROUND(this->w));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector4<unsigned char> toUChar() const {
-			Vector4<int> vi = toIntRound(); return Vector4<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255), (unsigned char)CLAMP(vi.w, 0, 255));
+		_CPU_AND_GPU_CODE_ inline Vector4<unsigned char> ToUChar() const {
+			Vector4<int> vi = ToIntRound(); return Vector4<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255), (unsigned char)CLAMP(vi.w, 0, 255));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector4<float> toFloat() const {
+		_CPU_AND_GPU_CODE_ inline Vector4<float> ToFloat() const {
 			return Vector4<float>((float)this->x, (float)this->y, (float)this->z, (float)this->w);
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector4<T> homogeneousCoordinatesNormalize() const {
+		_CPU_AND_GPU_CODE_ inline Vector4<T> HomogeneousCoordinatesNormalize() const {
 			return (this->w <= 0) ? *this : Vector4<T>(this->x / this->w, this->y / this->w, this->z / this->w, 1);
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector3<T> toVector3() const {
+		_CPU_AND_GPU_CODE_ inline Vector3<T> ToVector3() const {
 			return Vector3<T>(this->x, this->y, this->z);
 		}
 
-		_CPU_AND_GPU_CODE_ const T *getValues() const { return this->v; }
-		_CPU_AND_GPU_CODE_ Vector4<T> &setValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; this->z = rhs[2]; this->w = rhs[3]; return *this; }
+		_CPU_AND_GPU_CODE_ const T *GetValues() const { return this->v; }
+		_CPU_AND_GPU_CODE_ Vector4<T> &SetValues(const T *rhs) { this->x = rhs[0]; this->y = rhs[1]; this->z = rhs[2]; this->w = rhs[3]; return *this; }
 
 		// indexing operators
 		_CPU_AND_GPU_CODE_ T &operator [](int i) { return this->v[i]; }
@@ -518,7 +518,7 @@ namespace utils {
 	{
 	public:
 		typedef T value_type;
-		_CPU_AND_GPU_CODE_ inline int size() const { return 6; }
+		_CPU_AND_GPU_CODE_ inline int Size() const { return 6; }
 
 		////////////////////////////////////////////////////////
 		//  Constructors
@@ -532,20 +532,20 @@ namespace utils {
 		_CPU_AND_GPU_CODE_ explicit Vector6(const Vector3_<T> &u, T v0, T v1, T v2) { this->v[0] = u.x; this->v[1] = u.y; this->v[2] = u.z; this->v[3] = v0; this->v[4] = v1; this->v[5] = v2; }
 		_CPU_AND_GPU_CODE_ explicit Vector6(const Vector2_<T> &u, T v0, T v1, T v2, T v3) { this->v[0] = u.x; this->v[1] = u.y; this->v[2] = v0; this->v[3] = v1; this->v[4] = v2, this->v[5] = v3; }
 
-		_CPU_AND_GPU_CODE_ inline Vector6<int> toIntRound() const {
+		_CPU_AND_GPU_CODE_ inline Vector6<int> ToIntRound() const {
 			return Vector6<int>((int)ROUND(this[0]), (int)ROUND(this[1]), (int)ROUND(this[2]), (int)ROUND(this[3]), (int)ROUND(this[4]), (int)ROUND(this[5]));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector6<unsigned char> toUChar() const {
-			Vector6<int> vi = toIntRound(); return Vector6<unsigned char>((unsigned char)CLAMP(vi[0], 0, 255), (unsigned char)CLAMP(vi[1], 0, 255), (unsigned char)CLAMP(vi[2], 0, 255), (unsigned char)CLAMP(vi[3], 0, 255), (unsigned char)CLAMP(vi[4], 0, 255), (unsigned char)CLAMP(vi[5], 0, 255));
+		_CPU_AND_GPU_CODE_ inline Vector6<unsigned char> ToUChar() const {
+			Vector6<int> vi = ToIntRound(); return Vector6<unsigned char>((unsigned char)CLAMP(vi[0], 0, 255), (unsigned char)CLAMP(vi[1], 0, 255), (unsigned char)CLAMP(vi[2], 0, 255), (unsigned char)CLAMP(vi[3], 0, 255), (unsigned char)CLAMP(vi[4], 0, 255), (unsigned char)CLAMP(vi[5], 0, 255));
 		}
 
-		_CPU_AND_GPU_CODE_ inline Vector6<float> toFloat() const {
+		_CPU_AND_GPU_CODE_ inline Vector6<float> ToFloat() const {
 			return Vector6<float>((float)this[0], (float)this[1], (float)this[2], (float)this[3], (float)this[4], (float)this[5]);
 		}
 
-		_CPU_AND_GPU_CODE_ const T *getValues() const { return this->v; }
-		_CPU_AND_GPU_CODE_ Vector6<T> &setValues(const T *rhs) { this[0] = rhs[0]; this[1] = rhs[1]; this[2] = rhs[2]; this[3] = rhs[3]; this[4] = rhs[4]; this[5] = rhs[5]; return *this; }
+		_CPU_AND_GPU_CODE_ const T *GetValues() const { return this->v; }
+		_CPU_AND_GPU_CODE_ Vector6<T> &SetValues(const T *rhs) { this[0] = rhs[0]; this[1] = rhs[1]; this[2] = rhs[2]; this[3] = rhs[3]; this[4] = rhs[4]; this[5] = rhs[5]; return *this; }
 
 		// indexing operators
 		_CPU_AND_GPU_CODE_ T &operator [](int i) { return this->v[i]; }
@@ -654,7 +654,7 @@ namespace utils {
 	{
 	public:
 		typedef T value_type;
-		_CPU_AND_GPU_CODE_ inline int size() const { return this->vsize; }
+		_CPU_AND_GPU_CODE_ inline int Size() const { return this->vsize; }
 
 		////////////////////////////////////////////////////////
 		//  Constructors
@@ -669,27 +669,27 @@ namespace utils {
 		_CPU_AND_GPU_CODE_ const T &operator [](int i) const { return this->v[i]; }
 
 
-		_CPU_AND_GPU_CODE_ inline VectorX<int, s> toIntRound() const {
+		_CPU_AND_GPU_CODE_ inline VectorX<int, s> ToIntRound() const {
 			VectorX<int, s> retv;
 			for (int i = 0; i < s; i++) retv[i] = (int)ROUND(this->v[i]);
 			return retv;
 		}
 
-		_CPU_AND_GPU_CODE_ inline VectorX<unsigned char, s> toUChar() const {
-			VectorX<int, s> vi = toIntRound();
+		_CPU_AND_GPU_CODE_ inline VectorX<unsigned char, s> ToUChar() const {
+			VectorX<int, s> vi = ToIntRound();
 			VectorX<unsigned char, s> retv;
 			for (int i = 0; i < s; i++) retv[i] = (unsigned char)CLAMP(vi[0], 0, 255);
 			return retv;
 		}
 
-		_CPU_AND_GPU_CODE_ inline VectorX<float, s> toFloat() const {
+		_CPU_AND_GPU_CODE_ inline VectorX<float, s> ToFloat() const {
 			VectorX<float, s> retv;
 			for (int i = 0; i < s; i++) retv[i] = (float) this->v[i];
 			return retv;
 		}
 
-		_CPU_AND_GPU_CODE_ const T *getValues() const { return this->v; }
-		_CPU_AND_GPU_CODE_ VectorX<T, s> &setValues(const T *rhs) { for (int i = 0; i < s; i++) this->v[i] = rhs[i]; return *this; }
+		_CPU_AND_GPU_CODE_ const T *GetValues() const { return this->v; }
+		_CPU_AND_GPU_CODE_ VectorX<T, s> &SetValues(const T *rhs) { for (int i = 0; i < s; i++) this->v[i] = rhs[i]; return *this; }
 		_CPU_AND_GPU_CODE_ void Clear(T v){
 			for (int i = 0; i < s; i++)
 				this->v[i] = v;
@@ -800,24 +800,24 @@ namespace utils {
 	// Generic vector operations
 	////////////////////////////////////////////////////////////////////////////////
 
-	template< class T> _CPU_AND_GPU_CODE_ inline T sqr(const T &v) { return v*v; }
+	template< class T> _CPU_AND_GPU_CODE_ inline T Square(const T &v) { return v*v; }
 
 	// compute the dot product of two vectors
-	template<class T> _CPU_AND_GPU_CODE_ inline typename T::value_type dot(const T &lhs, const T &rhs) {
+	template<class T> _CPU_AND_GPU_CODE_ inline typename T::value_type Dot(const T &lhs, const T &rhs) {
 		typename T::value_type r = 0;
-		for (int i = 0; i < lhs.size(); i++)
+		for (int i = 0; i < lhs.Size(); i++)
 			r += lhs[i] * rhs[i];
 		return r;
 	}
 
 	// return the length of the provided vector
-	template< class T> _CPU_AND_GPU_CODE_ inline typename T::value_type length(const T &vec) {
-		return sqrt(dot(vec, vec));
+	template< class T> _CPU_AND_GPU_CODE_ inline typename T::value_type Length(const T &vec) {
+		return sqrt(Dot(vec, vec));
 	}
 
 	// return the normalized version of the vector
-	template< class T> _CPU_AND_GPU_CODE_ inline T normalize(const T &vec)	{
-		typename T::value_type sum = length(vec);
+	template< class T> _CPU_AND_GPU_CODE_ inline T Normalize(const T &vec)	{
+		typename T::value_type sum = Length(vec);
 		return sum == 0 ? T(typename T::value_type(0)) : vec / sum;
 	}
 
@@ -830,18 +830,18 @@ namespace utils {
 	//}
 
 	//component wise min
-	template< class T> _CPU_AND_GPU_CODE_ inline T minV(const T &lhs, const T &rhs) {
+	template< class T> _CPU_AND_GPU_CODE_ inline T MinV(const T &lhs, const T &rhs) {
 		T rv;
-		for (int i = 0; i < lhs.size(); i++)
+		for (int i = 0; i < lhs.Size(); i++)
 			rv[i] = min(lhs[i], rhs[i]);
 		return rv;
 	}
 
 	// component wise max
 	template< class T>
-	_CPU_AND_GPU_CODE_ inline T maxV(const T &lhs, const T &rhs)	{
+	_CPU_AND_GPU_CODE_ inline T MaxV(const T &lhs, const T &rhs)	{
 		T rv;
-		for (int i = 0; i < lhs.size(); i++)
+		for (int i = 0; i < lhs.Size(); i++)
 			rv[i] = max(lhs[i], rhs[i]);
 		return rv;
 	}

@@ -93,11 +93,11 @@ bool semantic_mapping::objects::ReadDisparityCalibration(const char* file_name,
   semantic_mapping::objects::ReadDisparityCalibration(f, dest);
 }
 
-bool semantic_mapping::objects::ReadRGBDCalibration(std::istream& src,
-                                RGBDCalibration& dest) {
+bool semantic_mapping::objects::ReadRgbdCalibration(std::istream& src,
+                                RgbdCalibration& dest) {
   if(!semantic_mapping::objects::ReadIntrinsics(src, dest.intrinsics_rgb_))
     return false;
-  if(!semantic_mapping::objects::ReadIntrinsics(src, dest.intrinsics_d_))
+  if(!semantic_mapping::objects::ReadIntrinsics(src, dest.intrinsics_depth_))
     return false;
   if(!semantic_mapping::objects::ReadExtrinsics(src, 
                                  dest.transfer_rgb_to_depth_))
@@ -109,23 +109,23 @@ bool semantic_mapping::objects::ReadRGBDCalibration(std::istream& src,
   return true;
 }
 
-bool semantic_mapping::objects::ReadRGBDCalibration(const char* file_name,
-                                                    RGBDCalibration& dest) {
+bool semantic_mapping::objects::ReadRgbdCalibration(const char* file_name,
+                                                    RgbdCalibration& dest) {
   std::ifstream f(file_name);
-  return semantic_mapping::objects::ReadRGBDCalibration(f, dest);
+  return semantic_mapping::objects::ReadRgbdCalibration(f, dest);
 }
 
-bool semantic_mapping::objects::ReadRGBDCalibration(
+bool semantic_mapping::objects::ReadRgbdCalibration(
                                 const char* rgb_intrinsics_file,
                                 const char* depth_intrinsics_file,
                                 const char* disparity_calib_file,
                                 const char* extrinsics_file,
-                                RGBDCalibration& dest) {
+                                RgbdCalibration& dest) {
   bool result = true;
   result &= semantic_mapping::objects::ReadIntrinsics(rgb_intrinsics_file, 
                                        dest.intrinsics_rgb_);
   result &= semantic_mapping::objects::ReadIntrinsics(depth_intrinsics_file,
-                                       dest.intrinsics_d_);
+                                       dest.intrinsics_depth_);
   result &= semantic_mapping::objects::ReadExtrinsics(extrinsics_file, 
                                        dest.transfer_rgb_to_depth_);
   result &= semantic_mapping::objects::ReadDisparityCalibration(

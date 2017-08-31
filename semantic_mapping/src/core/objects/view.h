@@ -6,15 +6,15 @@ namespace objects {
 
 class View {
 public:
-  RGBDCalibration* rgbd_calib_;
+  RgbdCalibration* rgbd_calib_;
   Uchar4Image* rgb_;
   FloatImage* depth_;
   Float4Image* depth_normal_;
   FloatImage* depth_uncertainty_;
 
-  View(const RGBDCalibration* rgbd_calib, Vector2i rgb_image_size, 
+  View(const RgbdCalibration* rgbd_calib, Vector2i rgb_image_size, 
        Vector2i depth_image_size, bool use_gpu) {
-    this->rgbd_calib_ = new RGBDCalibration(*rgbd_calib);
+    this->rgbd_calib_ = new RgbdCalibration(*rgbd_calib);
     this->rgb_ = new Uchar4Image(rgb_image_size, true, use_gpu);
     this->depth_ = new FloatImage(depth_image_size, true, use_gpu);
     this->depth_normal_ = NULL;
