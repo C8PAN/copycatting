@@ -25,6 +25,10 @@ public:
       return cache_hessian_;
     }
 
+    const Pose& GetParameter() const {
+      return *pose_
+    }
+
     EvaluationPoint(Pose* pose, ColorTracker* parent);
    
     ~EvaluationPoint() {
