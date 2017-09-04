@@ -115,6 +115,9 @@ struct Voxel_f {
 
 typedef Voxel_s Voxel;
 
+typedef semantic_mapping::objects::VoxelBlockHash VoxelIndex;
+// or typedef semantic_mapping::objects::PlainVoxelArray VoxelIndex;
+
 #ifndef FloatImage
 #define FloatImage utils::Image<float> 
 #endif /* ifndef FloatImage utils::Image<float> */

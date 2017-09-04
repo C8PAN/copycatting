@@ -17,7 +17,8 @@ private:
   ViewBuilder* view_builder_;
   DenseMapper<Voxel, VoxelIndex>* dense_mapper_;
   TrackingController* tracking_controller_;
-
+  Tracker* tracker_;
+  ImuCalibrator* imu_calibrator_;
 };
 		
 } /* main_engine */ 		
