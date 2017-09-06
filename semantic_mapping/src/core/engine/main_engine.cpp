@@ -126,7 +126,79 @@ void MainEngine::GetImage(Uchar4Image* out, ImageType image_type,
     case MainEngine::IMAGE_ORIGIN_RGB:
       out->ChangeDimension(view_->rgb_->num_dims_);
       if(settings_->device_type_ == Settings::DEVICE_GPU)
+        out->SetFrom(view_->rgb_, utils::MemoryBlock<Vector4u>::GPU_TO_CPU);
+      else
+        out->SetFrom(view_->rgb_, utils::MemoryBlock<Vector4u>::CPU_TO_GPU);
+      break;
+    case MainEngine::IMAGE_ORIGIN_DEPTH:
+      out->ChangeDimension(view_->depth_->num_dims_);
+      if(settings_->tracker_type_ ==
+         semantic_mapping::objects::Settings::TRACKER_WICP) {
+         if(settings_->device_type_ == Settings::DEVICE_GPU)
+           view_->depth_uncertainty_->UpdateHostFromDevice();
+         VisualisationEngine<Voxel, VoxelIndex>::WeightToUchar4(out, 
+                                                 view_->depth_uncertainty_);
+      } else {
+        if(settings_->device_type_ == Settings::DEVICE_GPU)
+          view_->depth_->UpdateHostFromDevice();
+        VisualisationEngine<Voxel, VoxelIndex>::DepthToUchar4(out, 
+                                                view_->depth_);
+      }
+      break;
+    case MainEngine::IMAGE_SCENERAYCAST:
+      utils::Image<Vector4u>* src_image = render_state_live_->raycast_image_;
+      out->ChangeDimension(src_image->num_dims_);
+      if(settings_->device_type_ == Settings::DEVICE_GPU)
+        out->SetFrom(src_image, utils::MemoryBlock<Vector4u>::GPU_TO_CPU);
+      else 
+        out->SetFrom(src_image, utils::MemoryBlock<Vector4u>::CPU_TO_GPU);
+      break;
+    case MainEngine::IMAGE_FREE_CAMERA_SHADED:
+    case MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_VOLUME:
+    case MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_NORMAL:
+    {
+      VisualisationEngine::RenderImageType type 
+                           = VisualisationEngine::RENDER_SHADED_GREYSCALE;  
+      if(image_type == MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_VOLUME) 
+        type = VisualisationEngine::RENDER_COLOR_FROM_VOLUME;
+      else if(image_type == MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_NORMAL)
+        type = VisualisationEngine::RENDER_COLOR_FROM_NORMAL;
+      if(render_state_free_view_ == NULL)
+        render_state_free_view_ = visualisation_engine_->CreateRenderState(
+                                                         out->num_dims_);
+      visualisation_engine_->FindVisibleBlocks(pose, intrinsics, 
+                                               render_state_free_view_);
+      visualisation_engine_->CreateExpectedDepths(pose, intrinsics,
+                                                  render_state_free_view_);
+      visualisation_engine_->RenderImage(pose, intrinsics, 
+                             render_state_free_view_, 
+                             render_state_free_view_->raycast_image_,
+                             type);
+      if(settings_->device_type_ == Settings::DEVICE_GPU) 
+        out->SetFrom(render_state_free_view_->raycast_image_, 
+                     utils::MemoryBlock<Vector4u>::GPU_TO_CPU);
+      else 
+        out->SetFrom(render_state_free_view_->raycast_image_,
+                     utils::MemoryBlock<Vector4u>::CPU_TO_GPU);
+      break;
+    }
+    case MainEngine::IMAGE_UNKNOWN:
+      break;  
   } 
 }
 
+void MainEngine::TurnOnIntegration() {
+  fusion_active_ = true;
+}
 
+void MainEngine::TurnOffIntegration() {
+  fusion_active_ = false;
+}
+
+void MainEngine::TurnOnMainProcessing() {
+  main_processing_active_ = true;
+}
+
+void MainEngine::TurnOffMainProcessing() {
+  main_processing_active_ = false;
+} 
