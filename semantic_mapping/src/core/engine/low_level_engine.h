@@ -17,9 +17,9 @@ public:
 
   virtual void FilterSubsample(Uchar4Image* image_out, 
                                const Uchar4Image* image_in) const = 0;
-  virtual void FilterSubsample(FloatImage* image_out, 
+  virtual void FilterSubsampleWithHoles(FloatImage* image_out, 
                                const FloatImage* image_in) const = 0;
-  virtual void FilterSubsample(Float4Image* image_out,
+  virtual void FilterSubsampleWithHoles(Float4Image* image_out,
                                const Float4Image* image_in) const = 0;
   
   virtual void GradientX(Short4Image* gradient_out, 
