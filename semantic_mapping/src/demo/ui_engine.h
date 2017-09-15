@@ -61,7 +61,7 @@ private:
   Settings internal_settings_;
   ImageSourceEngine* image_source_;
   MainEngine* main_engine_;
-  StopWatchInterface* timer_instance_;
+  StopWatchInterface* timer_instant_;
   StopWatchInterface* timer_average_;
 
   static const int NUM_WIN = 3;
@@ -70,6 +70,8 @@ private:
   uint texture_id_[NUM_WIN];
   Uchar4Image* out_image_[NUM_WIN];
   MainEngine::ImageType out_image_type_[NUM_WIN];
+  Uchar4Image* input_rgb_image_;
+  ShortImage* input_raw_depth_image_;
   Uchar4Image* input_imu_measurement_;
   bool free_view_active_;
   bool intergration_active_;

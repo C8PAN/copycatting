@@ -268,3 +268,174 @@ void UiEngine::GlutMouseMoveFunction(int x, int y) {
   }
 }
 
+void UiEngine::GlutMouseWheelFunction(int button, int dir ,int x, int y) {
+  UiEngine* ui_engine = UiEngine::Instance();
+  static const float scale_translation = 0.05f;
+  ui_engine->free_view_pose_.SetTranslation(
+             ui_engine->free_view_pose_.GetTranslation()+
+             scale_translation*Vector3f(0.0f, 0.0f, (dir>0) ? -1.0f : 1.0f));
+  ui_engine->need_refresh_ = true;
+}
+
+void UiEngine::Initialise(int& argc, char** argv,
+                          ImageSourceEngine* image_source, 
+                          ImuSourceEngine* imu_source,
+                          MainEngine* main_engine,
+                          const char* out_folder,
+                          Settings::DeviceType device_type) {
+  this->free_view_active_ = false;
+  this->intergration_active_ = true;
+  this->current_color_mode_ = 0;
+  this->color_modes_.push_back(UiColorMode("shaded grayscale", 
+                               MainEngine::IMAGE_FREE_CAMERA_SHADED));
+  if(Voxel::has_color_information_)
+    this->color_modes_.push_back(UiColorMode("integrated colors", 
+                       MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_VOLUME));
+  this->color_modes_.push_back(UiColorMode("surface normal", 
+                       MainEngine::IMAGE_FREE_CAMERA_COLOR_FROM_NORMAL));
+  this->image_source_ = image_source;
+  this->imu_source_ = imu_source;
+  this->main_engine_ = main_engine;
+  
+  size_t len = strlen(out_folder);
+  this->out_folder_ = new char[len+1];
+  strcpy(this->out_folder_, out_folder);
+  
+  int text_height = 30;
+  win_size_.x = (int)(1.5f*(float)(image_source_->GetDepthImageSize().x));
+  win_size_.y = image_source_->GetDepthImageSize().y+text_height;
+  float h1 = text_height/(float)win_size_.y;
+  float h2 = (1.0f+h1)/2;
+  win_reg_[0] = Vector4f(0.0f, h1, 0.665f, 1.0f);
+  win_reg_[1] = Vector4f(0.665f, h2, 1.0f, 1.0f);
+  win_reg_[2] = Vector4f(0.665f, h1, 1.0f, h2);
+  
+  this->is_recording_ = false;
+  this->current_frame_num_ = 0;
+  
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+  glutInitWindowSize(win_size_.x, win_size_.y);
+  glutCreateWindow("semantic mapping");
+  glGentextures(NUM_WIN, texture_id_);
+  glutDisplayFunc(UiEngine::GlutDisplayFunction);
+  glutKeyboardUpFunc(UiEngine::GlutKeyUpFunction);
+  glutMouseFunc(UiEngine::GlutMouseButtonFunction);
+  glutMotionFunc(UiEngine::GlutMouseMoveFunction);
+  glutIdleFunc(UiEngine::GlutIdleFunction);
+
+  glutMouseWheelFunc(UiEngine::GlutMouseWheelFunction);
+  glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, 1);
+
+  bool allocate_gpu = false;
+  if(device_type == Settings::DEVICE_GPU)
+    allocate_gpu = true;
+  
+  for(int w=0; w<NUM_WIN; w++)
+    out_image_[w] = new Uchar4Image(image_source_->GetDepthImageSize(),
+                                    true, allocate_gpu);
+  input_rgb_image_ = new Uchar4Image(image_source_->GetRgbImageSize(),
+                                     true, allocate_gpu);
+  input_raw_depth_image_ = new ShortImage(image_source_->GetDepthImageSize(),
+                                          true, allocate_gpu);
+  input_imu_measurement_ = new ImuMeasurement();
+  save_image_ = new Uchar4Image(image_source_->GetDepthImageSize(), true, 
+                                false);
+  out_image_type_[0] = MainEngine::IMAGE_SCENERAYCAST;
+  out_image_type_[1] = MainEngine::IMAGE_ORIGIN_DEPTH;
+  out_image_type_[2] = MainEngine::IMAGE_ORIGIN_RGB;
+  if(input_rgb_image_->num_dims_ == Vector2i(0,0))
+    out_image_type_[2] = MainEngine::IMAGE_UNKNOWN;
+  
+  main_loop_action_ = PROCESS_PAUSED;
+  mouse_state_ = 0;
+  need_refresh_ = false;
+  processed_frame_num_ = 0;
+  processed_time_ = 0.0f;
+  
+  CudaSafeCall(cudaThreadSynchronize());
+
+  SdkCreateTimer(&timer_instant_);
+  SdkCreateTimer(&timer_average_);
+  SdkresetTimer(&timer_average_);
+  
+  printf("initialized.\n");  
+}
+
+void UiEngine::SaveScreenshot(const char* file_name) const {
+  Uchar4Image screenshot(GetWindowSize(), true, false);
+  GetScreenshot(&screenshot);
+  SaveImageToFile(&screenshot, file_name, true);
+}
+
+void UiEngine::SaveSceneToMesh(const char* file_name) const {
+  main_engine_->SaveSceneToMesh(file_name);
+}
+
+void UiEngine::GetScreenshot(Uchar4Image* dest) const {
+  glReadPixels(0, 0, dest->num_dims_.x, dest->num_dims_.y, GL_RGBA, 
+               GL_UNSIGNED_BYTE, dest->GetData(MEMEORY_DEVICE_CPU));
+}
+
+void UiEngine::ProcessFrame() {
+  if(!image_source_->HasMoreImages())
+    return;
+  image_source_->GetImages(input_rgb_image_, input_raw_depth_image_);
+
+  if(imu_source_ != NULL) {
+    if(!imu_source_->HasMoreMeasurements())
+      return;
+    else 
+      imu_source_->GetMeasurement(input_imu_measurement_);
+  } 
+ 
+  if(is_recording_) {
+    char str[250];
+    sprintf(str, "%s/%04d.pgm", out_folder_, current_frame_num_);
+    SaveImageToFile(input_raw_depth_image_, str);
+    if(input_rgb_image_->num_dims_ != Vector2i(0,0)) {
+      sprintf(str, "%s/%04d.ppm", out_folder_, current_frame_num_);
+      SaveImageToFile(input_rgb_image_, str);
+    }
+  }
+ 
+  SdkResetTimer(&timer_instant_);
+  SdkStartTimer(&timer_instant_);
+  SdkStartTimer(&timer_average_);
+
+  if(imu_source_ != NULL)
+    main_engine_->ProcessFrame(input_rgb_image_, input_raw_depth_image_, 
+                               input_imu_measurement_);
+  else 
+    main_engine_->ProcessFrame(input_rgb_image_, input_raw_depth_image_);
+
+  CudaSafeCall(cudaThreadSynchronize());
+
+  SdkStopTimer(&timer_instant_);
+  SdkStopTimer(&timer_average_);
+
+  processed_time_ = SdkGetAverageTimerValue(&timer_average_);
+  current_frame_num_++;
+}
+
+void UiEngine::Run() {
+  glutMainLoop();
+}
+
+void UiEngine::ShutDown() {
+  SdkDeleteTimer(&timer_instant_);
+  SdkDeleteTimer(&timer_average_);
+  
+  for(int w=0; w<NUM_WIN; w++)
+    delete out_image_[w];
+
+  delete input_rgb_image_;
+  delete input_raw_depth_image_;
+  delete input_imu_measurement_;
+  
+  delete[] out_folder_;
+  delete save_image_;
+  delete instance_;
+  instance_ = NULL;
+}
+
