@@ -17,7 +17,7 @@ TestRegistry& TestRegistry::instance() {
 }
 
 void TestRegistry::Add(Test *test) {
-  if(test==0) {
+  if(tests==0) {
     tests=test;
     return;
   }
